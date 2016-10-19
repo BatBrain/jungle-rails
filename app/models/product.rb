@@ -1,5 +1,6 @@
 class Product < ActiveRecord::Base
-  
+  include  ActionView::Helpers::NumberHelper
+
   monetize :price_cents, numericality: true
   mount_uploader :image, ProductImageUploader
 
@@ -10,4 +11,7 @@ class Product < ActiveRecord::Base
   validates :quantity, presence: true
   validates :category, presence: true
 
+  def formatted_price
+    number_to_currency(price, precision: 2)
+  end
 end
