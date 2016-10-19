@@ -4,6 +4,8 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+
+    ReceiptMailer.receipt_email(@order).deliver_now
   end
 
   def create
@@ -42,6 +44,7 @@ class OrdersController < ApplicationController
       email: params[:stripeEmail],
       total_cents: cart_total,
       stripe_charge_id: stripe_charge.id, # returned by stripe
+      user: current_user
     )
     cart.each do |product_id, details|
       if product = Product.find_by(id: product_id)
