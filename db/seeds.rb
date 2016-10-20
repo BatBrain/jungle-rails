@@ -26,6 +26,26 @@ cat1 = Category.find_or_create_by! name: 'Apparel'
 cat2 = Category.find_or_create_by! name: 'Electronics'
 cat3 = Category.find_or_create_by! name: 'Furniture'
 
+## USERS
+
+puts "Re-creating Users"
+
+User.destroy_all
+
+User.create_with({
+  first_name: 'Scarlett',
+  last_name: 'Johansson',
+  email: 'soltest1234@mailinator.com',
+  password: 'password'
+  }).find_or_create_by(id: 1)
+
+User.create_with({
+  first_name: 'Testy',
+  last_name: 'Left',
+  email: 'soltest1234@mailinator.com',
+  password: 'password'
+  }).find_or_create_by(id: 2)
+
 ## PRODUCTS
 
 puts "Re-creating Products ..."
@@ -135,25 +155,25 @@ puts "Re-creating Reviews ..."
 
 Review.destroy_all
 
-cat3.products.where(name: 'Red Bookshelf')[0].reviews.create!({
+cat3.products.find_by(name: 'Red Bookshelf').reviews.create!({
  user_id: 1,
  description: 'Great product, weird though',
  rating: 4
 })
 
-cat3.products.where(name: 'Red Bookshelf')[0].reviews.create!({
+cat3.products.find_by(name: 'Red Bookshelf').reviews.create!({
  user_id: 2,
  description: 'Meh',
  rating: 3
 })
 
-cat2.products.where(name: 'Hotdog Slicer')[0].reviews.create!({
+cat2.products.find_by(name: 'Hotdog Slicer').reviews.create!({
  user_id: 1,
  description: 'What a useless product!',
  rating: 1
 })
 
-cat2.products.where(name: 'Hotdog Slicer')[0].reviews.create!({
+cat2.products.find_by(name: 'Hotdog Slicer').reviews.create!({
  user_id: 2,
  description: 'I love this slicer!!!',
  rating: 5

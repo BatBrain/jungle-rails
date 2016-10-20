@@ -1,6 +1,8 @@
 class Product < ActiveRecord::Base
   include  ActionView::Helpers::NumberHelper
 
+  has_many :reviews
+
   monetize :price_cents, numericality: true
   mount_uploader :image, ProductImageUploader
 
